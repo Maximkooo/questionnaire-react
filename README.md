@@ -11,10 +11,6 @@ Code that you can use by adding your own data to the survey
   <li>Beautiful interface</li>
 </ul>
 
-<h2>Version</h2>
-
-release v1.0
-
 <h2>Developer</h2>
 
 Developed by Maksym Synytskyi,
