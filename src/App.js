@@ -1,58 +1,58 @@
+import React from 'react';
+import { Game } from './components/game.js'
+import { Result } from './components/result.js';
+import { useState } from 'react';
+
 import './index.scss';
 
 const questions = [
   {
-    title: 'React - это ... ?',
-    variants: ['библиотека', 'фреймворк', 'приложение'],
+    title: 'React - it\'s ... ?',
+    variants: [
+      'library',
+      'framework',
+      'app'
+    ],
     correct: 0,
   },
   {
-    title: 'Компонент - это ... ',
-    variants: ['приложение', 'часть приложения или страницы', 'то, что я не знаю что такое'],
+    title: 'Component - it\'s ... ',
+    variants: [
+      'app',
+      'part of an appendix or page',
+      'that I don\'t know what is'
+    ],
     correct: 1,
   },
   {
-    title: 'Что такое JSX?',
+    title: 'What is JSX?',
     variants: [
-      'Это простой HTML',
-      'Это функция',
-      'Это тот же HTML, но с возможностью выполнять JS-код',
+      'this is simple HTML',
+      'this is a function of',
+      'this is the same HTML, but with the ability to run JS code',
     ],
     correct: 2,
   },
 ];
 
-function Result() {
-  return (
-    <div className="result">
-      <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
-      <h2>Вы отгадали 3 ответа из 10</h2>
-      <button>Попробовать снова</button>
-    </div>
-  );
-}
+const App = () => {
+  const [step, setStep] = useState(0)
+  const [correct, setCorrect] = useState(0)
 
-function Game() {
-  return (
-    <>
-      <div className="progress">
-        <div style={{ width: '50%' }} className="progress__inner"></div>
-      </div>
-      <h1>Что такое useState?</h1>
-      <ul>
-        <li>Это функция для хранения данных компонента</li>
-        <li>Это глобальный стейт</li>
-        <li>Это когда на ты никому не нужен</li>
-      </ul>
-    </>
-  );
-}
+  const onClickVariant = (index) => {
+    setStep(step + 1)
+    if (questions[step].correct === index) {
+      setCorrect(correct + 1)
+    }
+  }
 
-function App() {
   return (
     <div className="App">
-      <Game />
-      {/* <Result /> */}
+      {step < questions.length ?
+        <Game questions={questions} onClickVariant={onClickVariant} step={step} />
+        :
+        <Result correct={correct} questionsCount={questions.length} />
+      }
     </div>
   );
 }
